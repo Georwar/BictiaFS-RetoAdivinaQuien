@@ -1,4 +1,5 @@
 var acierto = 0;
+var realizado = 0; //valida si se realizó la seleccion previa de una imagen
 
 const imgFoto1 = document.getElementById("foto1");
 const imgFoto2 = document.getElementById("foto2");
@@ -9,8 +10,15 @@ const imgFoto5 = document.getElementById("foto5");
 const puntos = document.getElementById('campoPuntos');
 
 imgFoto1.addEventListener("click", () => {
-    validar1()
+    imgFoto1.classList.add('photo1');
+    if (realizado == 0) {
+        realizado = 1;
+    } else {
+        swal('Ya no tienes más intentos')
+    }
 });
+
+/* document.getElementById('modal1').addEventListener("click", validar1) */
 
 imgFoto2.addEventListener("click", () => {
     imgFoto2.classList.add('photo2');
@@ -55,20 +63,17 @@ var countdownTimer = setInterval('secondPassed()', 1000);
 //
 
 
+modal1.onclick = function validar1() {
 
-
-function validar1() {
-    imgFoto1.classList.add('photo1');
-
-    nombre = "Kevin"
-    if (nombre == document.getElementById(kevinModal1)) {
-
-        alert('Entra al if')
-
+    if (document.getElementById('kevinModal1').checked) {
         var puntos = 1;
-        document.getElementById('puntos').innerHTML = puntos;
-
+        swal('Adivinaste, tienes ' + puntos + ' punto!')
+        document.getElementById('puntos').value = puntos;
+        imgFoto1.classList.remove('button2')
+        imgFoto1.classList.add('photo1')
     } else {
-        alert('No entro al if')
+        swal('Qué mal! tienes que conocer más a tus compañeros');
+        imgFoto1.classList.remove('photo1');
     }
+
 }
